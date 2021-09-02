@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RestaurantTest {
     Restaurant restaurant;
+    List<Item> itemValue = new ArrayList<Item>();
 
     @BeforeEach
     public void creating_a_restaurant_for_testing(){
@@ -59,9 +60,19 @@ class RestaurantTest {
 
     //<<<<<<<<<<<<<<<<<<<<<<TOTAL ORDER VALUE>>>>>>>>>>>>>>>>>>>>>>>>>
     @Test
-    public void total_order_value_should_get_total_amount_when_items_are_selected(){
+    public void total_order_value_should_get_total_price_when_items_are_added(){
         itemValue = restaurant.getMenu();
         assertEquals(388,restaurant.totalOrderValue(itemValue));
+    }
+
+    @Test
+    public void total_order_value_should_reduce_total_price_when_item_is_removed(){
+        itemValue = restaurant.getMenu();
+        int totalPrice = restaurant.totalOrderValue(itemValue);
+        int itemTwo = itemValue.get(1).getPrice();
+        itemValue.remove(1);
+        assertEquals(119, restaurant.totalOrderValue(itemValue));
+        System.out.println(restaurant.totalOrderValue(itemValue));
     }
     //<<<<<<<<<<<<<<<<<<<<<<TOTAL ORDER VALUE>>>>>>>>>>>>>>>>>>>>>>>>>
 }
